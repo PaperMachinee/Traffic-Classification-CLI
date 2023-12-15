@@ -1,0 +1,6 @@
+*.pcap
+*.pcapng
+*.npy
+*.json
+.DS_Store
+__pycache__/
