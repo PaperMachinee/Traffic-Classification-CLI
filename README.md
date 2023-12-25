@@ -63,7 +63,7 @@ python main.py --help
 **If you like this project, welcome to give this project a star 💖.**
  
 ## Acknowledgment
-Thanks for these open-source projects!
+Thanks for these open-source projects or tools!
 
 - [editcap](https://www.wireshark.org/docs/man-pages/editcap.html)
 - [PcapPlusPlus](https://github.com/seladb/PcapPlusPlus)
