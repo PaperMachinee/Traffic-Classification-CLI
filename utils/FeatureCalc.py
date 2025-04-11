@@ -1,4 +1,9 @@
-
+'''
+@Author: WANG Maonan
+@Date: 2020-12-14 18:50:39
+@Description: 计算 pcap 文件的 26 个统计信息
+@LastEditTime: 2021-02-05 12:56:54
+'''
 import os, statistics
 from scapy.all import *
 

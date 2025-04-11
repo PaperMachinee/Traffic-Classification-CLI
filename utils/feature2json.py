@@ -1,3 +1,9 @@
+'''
+@Author: WANG Maonan
+@Date: 2021-02-05 10:27:13
+@Description: 计算原始 pcap 的统计特征, 并保存为 json 文件
+@LastEditTime: 2021-02-05 18:11:39
+'''
 import os
 import json
 from scapy.all import rdpcap

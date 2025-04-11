@@ -1,3 +1,7 @@
+'''
+@Author: WANG Maonan PaperMachinee
+@Description: SE-ResNet 与 AutoEncoder 的结合, 同时使用统计特征与原始流量, 并进行特征提取
+'''
 import torch
 import numpy as np
 import math

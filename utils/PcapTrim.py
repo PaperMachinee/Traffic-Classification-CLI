@@ -1,3 +1,9 @@
+'''
+@Author: WANG Maonan
+@Date: 2021-01-05 16:48:42
+@Description: 对 pcap 文件进行减裁, 使其转换为指定的大小
+@LastEditTime: 2021-02-02 10:42:45
+'''
 import os
 from rich.progress import track
 

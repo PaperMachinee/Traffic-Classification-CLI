@@ -1,3 +1,9 @@
+'''
+@Author: WANG Maonan, Yanhui Wu
+@Date: 2020-12-26 13:23:34
+@Description: 对 session 中所有 packet 的匿名化处理
+@LastEditTime: 2021-02-05 21:20:14
+'''
 import os
 from scapy.all import sniff, wrpcap
 from rich.progress import track
