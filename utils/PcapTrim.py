@@ -15,7 +15,11 @@ def pcap_trim(pcap_folder, trimed_file_len):
         trimed_file_len (str): 减裁的大小
     """
     for files in track(os.listdir(pcap_folder), description="preprocessing..."):
+            if not files.lower().endswith(".pcap"):
+                continue
             pcap_path = os.path.join(pcap_folder, files)
+            if not os.path.isfile(pcap_path):
+                continue
             pcapSize = os.path.getsize(pcap_path) # 获得文件的大小, bytes
 
             fileLength = trimed_file_len - pcapSize # 文件大小与规定大小之间的比较

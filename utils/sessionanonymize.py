@@ -65,8 +65,12 @@ def anonymize(folder_path):
     """
     print('anonymizing the packets. 正在匿名化 {} 下的 pcap 文件'.format(folder_path))
     for files in track(os.listdir(folder_path), description="processing..."):
+        if not files.lower().endswith(".pcap"):
+            continue
         # for Ufile in files:
         pcapPath = os.path.join(folder_path, files) # 需要转换的pcap文件的完整路径
+        if not os.path.isfile(pcapPath):
+            continue
         packets = session_anonymize(pcapPath) # 匿名化 session
         os.remove(pcapPath) # 删除原始的 pcap 文件
         if len(packets)>3: # 如果一个 session 中 packet 的个数较少, 就不保存

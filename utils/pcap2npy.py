@@ -27,7 +27,7 @@ def getIntfrom_pcap(filename):
     fh = np.uint8(fh)
     return fh
 
-def save_pcap2npy(pcap_folder, statistic_feature_json):
+def save_pcap2npy(pcap_folder, statistic_feature_json, npy_output_dir="./npy"):
     """将 pcap 文件分为训练集和测试集, 并进行保存. 
     => pcap 数据从 二进制 转换为 十进制, 调用 getIntfrom_pcap 函数
     => 从 json 文件读取每一个 pcap 的统计特征
@@ -44,14 +44,21 @@ def save_pcap2npy(pcap_folder, statistic_feature_json):
     data = []
     
     for files in track(os.listdir(pcap_folder), description="preprocessing..."):
+        if not files.lower().endswith(".pcap"):
+            continue
         print('正在将 {} 的 pcap 保存为 npy'.format(files))
         # for pcap_file in pcap_file_list:
         # pcap_file_name = os.path.normpath(pcap_file).split('\\')[-1]
-        pcap_content = getIntfrom_pcap(os.path.join(pcap_folder, files)) # 返回 pcap 的 十进制 内容, 这里 pcap_file 是 pcap 文件的路径名
+        pcap_file_path = os.path.join(pcap_folder, files)
+        if not os.path.isfile(pcap_file_path):
+            continue
+        pcap_content = getIntfrom_pcap(pcap_file_path) # 返回 pcap 的 十进制 内容, 这里 pcap_file 是 pcap 文件的路径名
         statistic_feature = statistic_feature_dict[files] # 得到统计特征
         data.append([pcap_content, statistic_feature]) # 将 pcap 和 label 添加到 data 中去
 
     # np.random.shuffle(data) # 对数据进行打乱
+    if not data:
+        raise RuntimeError("No session pcap files found for npy conversion")
     
     pcap_data = np.array([i[0] for i in data]) # raw pcap 减裁
     statistic_data = np.array([i[1] for i in data]) # statistic data
@@ -61,5 +68,6 @@ def save_pcap2npy(pcap_folder, statistic_feature_json):
     
 
 
-    np.save('./npy/pcap.npy', pcap_data)
-    np.save('./npy/statistic.npy', statistic_data)
+    os.makedirs(npy_output_dir, exist_ok=True)
+    np.save(os.path.join(npy_output_dir, 'pcap.npy'), pcap_data)
+    np.save(os.path.join(npy_output_dir, 'statistic.npy'), statistic_data)
